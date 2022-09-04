@@ -2,7 +2,6 @@ package com.password_manager_server.password_manager_server.model;
 
 import java.util.Collection;
 
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,8 +39,7 @@ public class User {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public User(long id, String firstName, String lastName, String email, String password, Collection<Role> roles) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
