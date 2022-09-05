@@ -1,5 +1,6 @@
 package com.password_manager_server.password_manager_server.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -35,8 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(UserRegistrationDto userRegristrationDto) {
         User user = new User(userRegristrationDto.getFirstName(),
-                userRegristrationDto.getLastName(), userRegristrationDto.getEmail(),
-                passwordEncoder.encode(userRegristrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+                userRegristrationDto.getLastName(),
+                userRegristrationDto.getEmail(),
+                passwordEncoder.encode(userRegristrationDto.getPassword()),
+                Arrays.asList(new Role("ROLE_USER")),
+                new ArrayList<>());
 
         return userRepository.save(user);
     }

@@ -1,6 +1,8 @@
 package com.password_manager_server.password_manager_server.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,8 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -39,12 +44,18 @@ public class User {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Service> serviceList = new ArrayList<>();
+
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles,
+            ArrayList<Service> serviceList) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.serviceList = serviceList;
     }
 
     public User() {
@@ -103,6 +114,14 @@ public class User {
     public String toString() {
         return "User [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
                 + ", password=" + password + ", roles=" + roles + "]";
+    }
+
+    public List<Service> getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(List<Service> serviceList) {
+        this.serviceList = serviceList;
     }
 
 }
