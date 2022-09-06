@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
@@ -45,17 +43,17 @@ public class User {
     private Collection<Role> roles;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Service> serviceList = new ArrayList<>();
+    private List<Account> acctList = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String password, Collection<Role> roles,
-            ArrayList<Service> serviceList) {
+            ArrayList<Account> acctList) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
-        this.serviceList = serviceList;
+        this.acctList = acctList;
     }
 
     public User() {
@@ -116,12 +114,12 @@ public class User {
                 + ", password=" + password + ", roles=" + roles + "]";
     }
 
-    public List<Service> getServiceList() {
-        return serviceList;
+    public List<Account> getAcctList() {
+        return acctList;
     }
 
-    public void setServiceList(List<Service> serviceList) {
-        this.serviceList = serviceList;
+    public void setAcctList(List<Account> acctList) {
+        this.acctList = acctList;
     }
 
 }

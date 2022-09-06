@@ -44,10 +44,17 @@
       </div>
     </nav>
 
+    <div th:if="${param.success}">
+      <div class="alert alert-info">Service added successfully.</div>
+    </div>
+
+    <div class="container"></div>
+
     <div class="container">
       <div clas="row">
-        <h1>Hello World</h1>
-        Welcome <span sec:authentication="principal.username"> User</span>
+        <div class="align-center"><h1>Password Manager</h1></div>
+
+        <!-- Welcome <span sec:authentication="principal.username"> User</span> -->
       </div>
     </div>
     <div class="container">
@@ -70,6 +77,41 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h2>Add service?</h2>
+
+          <form th:action="@{/}" th:object="${account}" method="post">
+            <div class="form-group">
+              <label class="control-label" for="name">Account Name</label>
+              <input
+                id="name"
+                class="form-control"
+                th:field="*{name}"
+                required
+                autofocus="autofocus"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="password"
+                >Service Password</label
+              >
+              <input
+                id="password"
+                class="form-control"
+                th:field="*{password}"
+                required
+                autofocus="autofocus"
+                type="password"
+              />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Add</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </body>

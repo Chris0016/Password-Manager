@@ -3,17 +3,17 @@ package com.password_manager_server.password_manager_server.web.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.password_manager_server.password_manager_server.model.Service;
+import com.password_manager_server.password_manager_server.model.Account;
 
 public class UserRegistrationDto {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private List<Service> serviceList = new ArrayList<>();
+    private List<Account> serviceList = new ArrayList<>();
 
     public UserRegistrationDto(String firstName, String lastName, String email, String password,
-            ArrayList<Service> serviceList) {
+            ArrayList<Account> serviceList) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,11 +58,11 @@ public class UserRegistrationDto {
         this.password = password;
     }
 
-    public List<Service> getServiceList() {
+    public List<Account> getServiceList() {
         return serviceList;
     }
 
-    public void setServiceList(List<Service> serviceList) {
+    public void setServiceList(List<Account> serviceList) {
         this.serviceList = serviceList;
     }
 

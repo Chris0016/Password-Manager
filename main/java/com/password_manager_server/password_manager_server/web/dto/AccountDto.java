@@ -1,38 +1,20 @@
-package com.password_manager_server.password_manager_server.model;
+package com.password_manager_server.password_manager_server.web.dto;
 
-import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Service {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class AccountDto {
     private String name;
     private String password;
     private String dateCreated;
     private String lastPasswordUpdate;
 
-    public Service(String name, String password, String dateCreated, String lastPasswordUpdate) {
+    public AccountDto(String name, String password, String dateCreated, String lastPasswordUpdate) {
+        super();
         this.name = name;
         this.password = password;
         this.dateCreated = dateCreated;
         this.lastPasswordUpdate = lastPasswordUpdate;
     }
 
-    public Service() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public AccountDto() {
     }
 
     public String getName() {

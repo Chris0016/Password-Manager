@@ -1,6 +1,17 @@
 TODO:
+    
+    Remove Account
+    Update Accout
+
+   
+    
+    Add adequate database constraints
+    Styling
+
     Automation and Testing Module(database automation tool and puppeter testing)
 
-
+    
 Changes made:
-    Load corresponding user services into the table in index.html. 
+    Refactored Service to Account due to naming conflicts with the spring system. 
+    Add Account functionality completed w/ appropriate date
+  
