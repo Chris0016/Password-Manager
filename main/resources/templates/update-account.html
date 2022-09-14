@@ -1,0 +1,81 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Account</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!--navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Password Manager</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <a
+            class="nav-item nav-link"
+            href="/"
+            sc:authorize="isAuthenticated()"
+            th:href="@{/logout}"
+            >Logout</a
+          >
+          <a class="nav-item nav-link" href="#">Pricing</a>
+          <a class="nav-item nav-link disabled" href="#">Disabled</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form
+            th:action="@{/updateAccount/{sid}(sid=${accountData.id})}"
+            method="post"
+            th:object="${account}"
+          >
+            <div class="form-group">
+              <label for="name"> Name</label>
+              <input
+                name="name"
+                class="form-control"
+                th:field="*{name}"
+                id="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password"> password</label>
+              <input
+                name="password"
+                class="form-control"
+                th:field="*{password}"
+                id="password"
+                type="password"
+              />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

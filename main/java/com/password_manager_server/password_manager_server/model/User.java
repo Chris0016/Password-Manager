@@ -122,4 +122,17 @@ public class User {
         this.acctList = acctList;
     }
 
+    public void deleteAccountById(Long id) {
+        for (Account account : acctList) {
+            if (account.getId().equals(id)) {
+                acctList.remove(account);
+                return;
+            }
+
+        }
+    }
+
+    public void deleteAccountById(String id) {
+        this.deleteAccountById(Long.parseLong(id));
+    }
 }

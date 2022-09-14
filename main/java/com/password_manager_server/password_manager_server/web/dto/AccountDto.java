@@ -1,5 +1,7 @@
 package com.password_manager_server.password_manager_server.web.dto;
 
+import com.password_manager_server.password_manager_server.model.Account;
+
 public class AccountDto {
     private String name;
     private String password;
@@ -47,6 +49,15 @@ public class AccountDto {
 
     public void setLastPasswordUpdate(String lastPasswordUpdate) {
         this.lastPasswordUpdate = lastPasswordUpdate;
+    }
+
+    public boolean equals(AccountDto account) {
+        return this.name.equals(
+                account.getName()) && password.equals(account.getPassword());
+    }
+
+    public Account toAccount() {
+        return new Account(this.getName(), this.getPassword(), this.getDateCreated(), this.getLastPasswordUpdate());
     }
 
 }

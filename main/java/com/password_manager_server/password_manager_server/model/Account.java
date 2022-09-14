@@ -66,4 +66,8 @@ public class Account {
         this.lastPasswordUpdate = lastPasswordUpdate;
     }
 
+    public boolean equals(Account account) {
+        return this.name.equals(
+                account.getName()) && password.equals(account.getPassword());
+    }
 }

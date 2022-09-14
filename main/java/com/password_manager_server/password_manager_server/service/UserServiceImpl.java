@@ -1,5 +1,6 @@
 package com.password_manager_server.password_manager_server.service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.password_manager_server.password_manager_server.model.Account;
 import com.password_manager_server.password_manager_server.model.Role;
 import com.password_manager_server.password_manager_server.model.User;
+import com.password_manager_server.password_manager_server.repository.AccountRepository;
 import com.password_manager_server.password_manager_server.repository.UserRepository;
 import com.password_manager_server.password_manager_server.web.dto.AccountDto;
 import com.password_manager_server.password_manager_server.web.dto.UserRegistrationDto;
@@ -26,14 +29,16 @@ import com.password_manager_server.password_manager_server.web.dto.UserRegistrat
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Lazy
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(@Lazy UserRepository userRepository) {
+    public UserServiceImpl(@Lazy UserRepository userRepository, @Lazy AccountRepository accountRepository) {
         super();
         this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
@@ -78,6 +83,31 @@ public class UserServiceImpl implements UserService {
         user.getAcctList().add(newService);
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public void updateAccount(AccountDto accountDto, String oldAcctId) {
+
+        // Detect any changes
+
+        // Account acct = accountRepository.findByName(accountDto.getName())
+        // .orElseThrow(() -> new NoSuchElementException("Account not found." +
+        // accountDto));
+
+        // Testing version: Delete After
+        Account acct = accountRepository.findById(Long.parseLong(oldAcctId))
+                .orElseThrow(() -> new NoSuchElementException("Account not found." + accountDto.getName()));
+        // Testing version: Delete After
+
+        if (acct.equals(accountDto.toAccount()))// bad code fix me
+            return; // No changes detected. Do nothing.
+
+        acct.setName(accountDto.getName());
+        acct.setPassword(accountDto.getPassword());
+        acct.setLastPasswordUpdate(java.time.LocalDate.now().toString());
+
+        accountRepository.save(acct);
+
     }
 
 }

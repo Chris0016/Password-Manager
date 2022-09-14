@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
     User save(UserRegistrationDto userRegristrationDto);
 
     User addAccount(String username, AccountDto accountDto);
+
+    void updateAccount(AccountDto accountDto, String oldAcctId);
 }

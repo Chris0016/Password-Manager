@@ -1,8 +1,8 @@
 TODO:
-    
-    Remove Account
-    Update Accout
 
+    Error messages on bad input(Check Regristration)
+    Navigation Bar Fix
+    Thymeleaf templating fix. Reuse components like navbar instead of writing them all over again. 
    
     
     Add adequate database constraints
@@ -10,8 +10,10 @@ TODO:
 
     Automation and Testing Module(database automation tool and puppeter testing)
 
+         Test if post mapping works without the th:field inside of the input tags(update-account.html).
     
+
 Changes made:
-    Refactored Service to Account due to naming conflicts with the spring system. 
-    Add Account functionality completed w/ appropriate date
-  
+      Update Account Functionality Added
+       Remove Account Functionality Added
+    
