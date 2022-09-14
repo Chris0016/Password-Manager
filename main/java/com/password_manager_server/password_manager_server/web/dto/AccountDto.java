@@ -1,14 +1,16 @@
 package com.password_manager_server.password_manager_server.web.dto;
 
+import java.time.LocalDate;
+
 import com.password_manager_server.password_manager_server.model.Account;
 
 public class AccountDto {
     private String name;
     private String password;
-    private String dateCreated;
-    private String lastPasswordUpdate;
+    private LocalDate dateCreated;
+    private LocalDate lastPasswordUpdate;
 
-    public AccountDto(String name, String password, String dateCreated, String lastPasswordUpdate) {
+    public AccountDto(String name, String password, LocalDate dateCreated, LocalDate lastPasswordUpdate) {
         super();
         this.name = name;
         this.password = password;
@@ -35,19 +37,19 @@ public class AccountDto {
         this.password = password;
     }
 
-    public String getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public String getLastPasswordUpdate() {
+    public LocalDate getLastPasswordUpdate() {
         return lastPasswordUpdate;
     }
 
-    public void setLastPasswordUpdate(String lastPasswordUpdate) {
+    public void setLastPasswordUpdate(LocalDate lastPasswordUpdate) {
         this.lastPasswordUpdate = lastPasswordUpdate;
     }
 

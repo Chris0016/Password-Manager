@@ -1,6 +1,7 @@
 package com.password_manager_server.password_manager_server.service;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -73,7 +74,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
 
-        String date = java.time.LocalDate.now().toString();
+        LocalDate date = java.time.LocalDate.now();
+
         Account newService = new Account(
                 serviceDto.getName(),
                 serviceDto.getPassword(),
@@ -90,21 +92,15 @@ public class UserServiceImpl implements UserService {
 
         // Detect any changes
 
-        // Account acct = accountRepository.findByName(accountDto.getName())
-        // .orElseThrow(() -> new NoSuchElementException("Account not found." +
-        // accountDto));
-
-        // Testing version: Delete After
         Account acct = accountRepository.findById(Long.parseLong(oldAcctId))
-                .orElseThrow(() -> new NoSuchElementException("Account not found." + accountDto.getName()));
-        // Testing version: Delete After
+                .orElseThrow(() -> new NoSuchElementException("Account not found."));
 
         if (acct.equals(accountDto.toAccount()))// bad code fix me
             return; // No changes detected. Do nothing.
 
         acct.setName(accountDto.getName());
         acct.setPassword(accountDto.getPassword());
-        acct.setLastPasswordUpdate(java.time.LocalDate.now().toString());
+        acct.setLastPasswordUpdate(java.time.LocalDate.now());
 
         accountRepository.save(acct);
 

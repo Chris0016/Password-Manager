@@ -1,5 +1,8 @@
 package com.password_manager_server.password_manager_server.model;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +14,14 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true)
     private String name;
     private String password;
-    private String dateCreated;
-    private String lastPasswordUpdate;
+    private LocalDate dateCreated;
+    private LocalDate lastPasswordUpdate;
 
-    public Account(String name, String password, String dateCreated, String lastPasswordUpdate) {
+    public Account(String name, String password, LocalDate dateCreated, LocalDate lastPasswordUpdate) {
         this.name = name;
         this.password = password;
         this.dateCreated = dateCreated;
@@ -50,19 +55,19 @@ public class Account {
         this.password = password;
     }
 
-    public String getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public String getLastPasswordUpdate() {
+    public LocalDate getLastPasswordUpdate() {
         return lastPasswordUpdate;
     }
 
-    public void setLastPasswordUpdate(String lastPasswordUpdate) {
+    public void setLastPasswordUpdate(LocalDate lastPasswordUpdate) {
         this.lastPasswordUpdate = lastPasswordUpdate;
     }
 
