@@ -23,7 +23,6 @@ import com.password_manager_server.password_manager_server.model.Role;
 import com.password_manager_server.password_manager_server.model.User;
 import com.password_manager_server.password_manager_server.repository.AccountRepository;
 import com.password_manager_server.password_manager_server.repository.UserRepository;
-import com.password_manager_server.password_manager_server.web.dto.AccountDto;
 import com.password_manager_server.password_manager_server.web.dto.UserRegistrationDto;
 
 @Service
@@ -55,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Invalid Username or Password"));
@@ -70,15 +74,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addAccount(String username, AccountDto serviceDto) {
+    public User addAccount(String username, Account newAccount) {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
 
         LocalDate date = java.time.LocalDate.now();
 
         Account newService = new Account(
-                serviceDto.getName(),
-                serviceDto.getPassword(),
+                newAccount.getName(),
+                newAccount.getPassword(),
                 date,
                 date);
 
@@ -88,18 +92,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAccount(AccountDto accountDto, String oldAcctId) {
+    public void updateAccount(Account updatedAccount, String acctId) {
 
         // Detect any changes
 
-        Account acct = accountRepository.findById(Long.parseLong(oldAcctId))
+        Account acct = accountRepository.findById(Long.parseLong(acctId))
                 .orElseThrow(() -> new NoSuchElementException("Account not found."));
 
-        if (acct.equals(accountDto.toAccount()))// bad code fix me
+        if (acct.equals(updatedAccount))// bad code fix me
             return; // No changes detected. Do nothing.
 
-        acct.setName(accountDto.getName());
-        acct.setPassword(accountDto.getPassword());
+        acct.setName(updatedAccount.getName());
+        acct.setPassword(updatedAccount.getPassword());
         acct.setLastPasswordUpdate(java.time.LocalDate.now());
 
         accountRepository.save(acct);

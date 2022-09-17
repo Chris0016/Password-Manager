@@ -17,6 +17,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -26,14 +29,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @Size(max = 15)
     @Column(name = "first_name")
     private String firstName;
 
+    @NotNull
+    @Size(max = 15)
     @Column(name = "last_name")
     private String lastName;
 
     // uses variable name as column name if not assigned
+    @NotNull
+    @Size(max = 30)
+    @Email(message = "Please enter a valid email-address")
     private String email;
+
+    @NotNull
+    @Size(min = 15, max = 300)
     private String password;
 
     // Cascade type -> Whenever a change like those specified in CascaseType is

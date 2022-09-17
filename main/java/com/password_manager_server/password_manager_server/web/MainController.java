@@ -19,7 +19,6 @@ import com.password_manager_server.password_manager_server.model.User;
 import com.password_manager_server.password_manager_server.repository.AccountRepository;
 import com.password_manager_server.password_manager_server.repository.UserRepository;
 import com.password_manager_server.password_manager_server.service.UserService;
-import com.password_manager_server.password_manager_server.web.dto.AccountDto;
 
 @Controller
 public class MainController {
@@ -33,7 +32,7 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    public MainController(UserRepository userRepository, UserService userService) {
+    public MainController(UserRepository userRepository, UserService userService, AccountRepository accountRepository) {
         super();
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
@@ -41,8 +40,8 @@ public class MainController {
     }
 
     @ModelAttribute("account")
-    public AccountDto accountDto() {
-        return new AccountDto();
+    public Account defaultInstance() {
+        return new Account();
     }
 
     @GetMapping("/login")
@@ -70,11 +69,11 @@ public class MainController {
     }
 
     @PostMapping
-    public String addAccount(@ModelAttribute("account") AccountDto accountDto) {
+    public String addAccount(@ModelAttribute("account") Account account) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = auth.getName();
 
-        userService.addAccount(currentUsername, accountDto);
+        userService.addAccount(currentUsername, account);
 
         return "redirect:/?accountAdded";
 
@@ -111,8 +110,8 @@ public class MainController {
     }
 
     @PostMapping("/updateAccount/{acctId}")
-    public String updateAccount(@PathVariable String acctId, @ModelAttribute("account") AccountDto accountDto) {
-        userService.updateAccount(accountDto, acctId);
+    public String updateAccount(@PathVariable String acctId, @ModelAttribute("account") Account updatedAccount) {
+        userService.updateAccount(updatedAccount, acctId);
 
         return "redirect:/?accountUpdated";
 
