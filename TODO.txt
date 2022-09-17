@@ -1,7 +1,23 @@
 TODO:
 
-    client side validation
-    Server Side validation
+    Server side validation:
+        Custom Password Validation. https://stackabuse.com/spring-custom-password-validation/ 
+        Do not accept odd characters. (Cross site scripting, SQL Injection attacks...)
+
+    client side validation:
+    Js Validation:
+
+        Registration: validation on client to check that password contains required characters. 
+        Registration: disabled button until all fields are complete and valid. 
+        Registration: Light email check
+
+        lOGIN: Max input length constraint on username and password
+        lOGIN: Disable login button until fields are valid
+
+        ADD ACCOUNT: max and min number of characters constraint
+   
+    
+
     Error handling 
         Front end
         Back end(SQL Exceptions?)
@@ -18,15 +34,9 @@ TODO:
     
 
 Changes made:
-
-    Database constraints:
-        Date field changed to LocalDate
-        Email has unique constraint
-        Account names are unique
-
-        Max length for fields have been set and revised. 
-        User: First Name(45), LastName(45), Email(45), password(255)
-        Account: Name(45) Password(255)
-
-    Bug Fix :
-        Update Account searching for the new change instead of by Id. As a result it threw Account not found. Bug has been fixed. 
+    DTOs removed, opted for simpler form to use model attribute instead to reduce code. RegistrationDTO kept. 
+             
+    Basic Server Side validation:
+        Bug Fix: User Binding error when trying to update and account. Account DTO removed and issue fixed.  
+        Further constraints added to fields, including Not null as well as min and max sizes(DB as well). 
+        @Email annotation added to User POJO. 
