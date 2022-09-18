@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Account {
@@ -15,9 +17,20 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Pattern(regexp = "^[a-zA-Z.\\-\\+=@_ ]*$", message = "Field only accepts, letters, .-+=@_")
+    @Size(min = 2, max = 30)
     @Column(unique = true)
     private String name;
+
+    /*
+     * Because this password is for an external account we cannot enforce our
+     * password policies on what makes a good password.
+     * However, restrictions on invalid characters have been added.
+     */
+    @Pattern(regexp = "^[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]*$", message = "Field only accepts, letters, +=#?!@$%^&*_")
+    @Size(min = 8, max = 30)
     private String password;
+
     private LocalDate dateCreated;
     private LocalDate lastPasswordUpdate;
 

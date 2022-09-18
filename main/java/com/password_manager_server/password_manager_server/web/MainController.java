@@ -2,11 +2,14 @@ package com.password_manager_server.password_manager_server.web;
 
 import java.util.NoSuchElementException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,8 +70,21 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping
-    public String addAccount(@ModelAttribute("account") Account account) {
+    @GetMapping("/AddAccount")
+    public String getAddAccount(@Valid @ModelAttribute("account") Account account) {
+        return "add-account";
+    }
+
+    @PostMapping("/AddAccount")
+    public String addAccount(@Valid @ModelAttribute("account") Account account,
+            BindingResult bindingResult) {
+        // Refactor: Add service needs to be in its own page, or be a model popup
+        if (bindingResult.hasErrors()) {
+
+            return "add-account";
+        }
+        // Refactor: Add service needs to be in its own page, or be a model popup
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = auth.getName();
 
@@ -109,7 +125,12 @@ public class MainController {
     }
 
     @PostMapping("/updateAccount/{acctId}")
-    public String updateAccount(@PathVariable String acctId, @ModelAttribute("account") Account updatedAccount) {
+    public String updateAccount(@PathVariable String acctId, @Valid @ModelAttribute("account") Account updatedAccount,
+            BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return "update-account";
+
         userService.updateAccount(updatedAccount, acctId);
 
         return "redirect:/?accountUpdated";

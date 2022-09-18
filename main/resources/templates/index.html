@@ -60,6 +60,11 @@
     </div>
     <div class="container">
       <div class="row">
+        <button class="btn btn-primary">
+          <a th:href="@{/AddAccount}"> Add Account</a>
+        </button>
+      </div>
+      <div class="row">
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -96,41 +101,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h2>Add service?</h2>
-
-          <form th:action="@{/}" th:object="${account}" method="post">
-            <div class="form-group">
-              <label class="control-label" for="name">Account Name</label>
-              <input
-                id="name"
-                class="form-control"
-                th:field="*{name}"
-                required
-                autofocus="autofocus"
-              />
-            </div>
-
-            <div class="form-group">
-              <label class="control-label" for="password"
-                >Service Password</label
-              >
-              <input
-                id="password"
-                class="form-control"
-                th:field="*{password}"
-                required
-                autofocus="autofocus"
-                type="password"
-              />
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-success">Add</button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   </body>

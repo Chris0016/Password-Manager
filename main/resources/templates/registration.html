@@ -56,6 +56,7 @@
                 autofocus="autofocus"
               />
               <span
+                class="text-danger"
                 th:if="${#fields.hasErrors('firstName')}"
                 th:errors="*{firstName}"
                 >Name error</span
@@ -71,6 +72,7 @@
                 autofocus="autofocus"
               />
               <span
+                class="text-danger"
                 th:if="${#fields.hasErrors('lastName')}"
                 th:errors="*{lastName}"
                 >lastName error</span
