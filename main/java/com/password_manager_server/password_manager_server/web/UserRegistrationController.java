@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.password_manager_server.password_manager_server.model.User;
 import com.password_manager_server.password_manager_server.service.UserService;
-import com.password_manager_server.password_manager_server.web.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("/register")

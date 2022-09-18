@@ -21,6 +21,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.password_manager_server.password_manager_server.config.ValidPassword;
+
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
@@ -46,7 +48,7 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 15, max = 300)
+    @ValidPassword
     private String password;
 
     // Cascade type -> Whenever a change like those specified in CascaseType is

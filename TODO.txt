@@ -1,9 +1,8 @@
 TODO:
 
-    Server side validation:
-        Custom Password Validation. https://stackabuse.com/spring-custom-password-validation/ 
+    Server Side Validation:
         Do not accept odd characters. (Cross site scripting, SQL Injection attacks...)
-
+    
     client side validation:
     Js Validation:
 
@@ -34,9 +33,6 @@ TODO:
     
 
 Changes made:
-    DTOs removed, opted for simpler form to use model attribute instead to reduce code. RegistrationDTO kept. 
-             
-    Basic Server Side validation:
-        Bug Fix: User Binding error when trying to update and account. Account DTO removed and issue fixed.  
-        Further constraints added to fields, including Not null as well as min and max sizes(DB as well). 
-        @Email annotation added to User POJO. 
+    Server side validation:
+        Custom Password Validation. https://stackabuse.com/spring-custom-password-validation/ 
+       
