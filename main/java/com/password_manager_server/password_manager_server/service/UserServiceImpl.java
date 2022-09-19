@@ -52,7 +52,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
+    public User addUser(User user) throws UsernameTakenException {
+
+        userRepository.findByEmail(user.getEmail()).ifPresent(user1 -> {
+            throw new UsernameTakenException();
+        });
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUser(User user) {
+
         return userRepository.save(user);
     }
 
@@ -90,7 +101,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAccount(Account updatedAccount, String acctId) {
+    public void updateAccount(Account updatedAccount, String acctId)
+            throws NoSuchElementException, AccountNameAlreadyExistsException {
 
         // Detect any changes
 
@@ -100,12 +112,41 @@ public class UserServiceImpl implements UserService {
         if (acct.equals(updatedAccount))// bad code fix me
             return; // No changes detected. Do nothing.
 
+        // Check if changed name causes a collision
+        if (!acct.getName().equals(updatedAccount.getName()))
+            accountRepository.findByName(updatedAccount.getName()).ifPresent(foundAcct -> {
+                throw new AccountNameAlreadyExistsException();
+            });
+
+        // Continue to update account otherwise
         acct.setName(updatedAccount.getName());
         acct.setPassword(updatedAccount.getPassword());
         acct.setLastPasswordUpdate(java.time.LocalDate.now());
 
         accountRepository.save(acct);
 
+    }
+
+    public class UsernameTakenException extends RuntimeException {
+
+        public UsernameTakenException() {
+            super("Username taken");
+        }
+
+        public UsernameTakenException(String message) {
+            super(message);
+        }
+    }
+
+    public class AccountNameAlreadyExistsException extends RuntimeException {
+
+        public AccountNameAlreadyExistsException() {
+            super("Accounnt name already taken.");
+        }
+
+        public AccountNameAlreadyExistsException(String message) {
+            super(message);
+        }
     }
 
 }

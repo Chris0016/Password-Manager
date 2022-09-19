@@ -1,4 +1,7 @@
 TODO:
+    
+        
+
 
     client side validation:
     Js Validation:
@@ -35,31 +38,6 @@ TODO:
     
 
 Changes made:
-     Server Side Validation:
-        Do not accept odd characters. (Cross site scripting, SQL Injection attacks...)
-        @Pattern annotation added for 
-            User:
-                Username(email)
-                ...
-            Account:
-                Username
-                Password -> Loose constraints because passwords are for external accounts.
-
-        Not necessary for User password field bc it gets hashed before being stored.
-
-        Custom Password Validation for registration. https://stackabuse.com/spring-custom-password-validation/
-
-        SQL Server validation: 
-            https://emailregex.com/
-            https://stackoverflow.com/questions/15560004/mysql-check-constraint-for-email-addresses
-            Email Constraint added:
-                ALTER TABLE `user` 
-                ADD CONSTRAINT `user.email_validation` 
-                CHECK (`email` REGEXP "^[a-zA-Z0-9][a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]*?[a-zA-Z0-9._-]?@[a-zA-Z0-9][a-zA-Z0-9._-]*?[a-zA-Z0-9]?\\.[a-zA-Z]{2,63}$");
-
-            SQL Constraints not added for other fields because they will ultimately be stored in an encrypted format.
-                Therefore the sql validation will be defunct due to the other fields being in their altered state. 
-
-
-        Remove custom password annotation and just use regex and size annotations?  
-       
+   Server Side Validation:
+        Duplicate Email on registration
+        Duplicate Account Name

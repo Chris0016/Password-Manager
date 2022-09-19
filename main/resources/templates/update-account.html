@@ -59,6 +59,12 @@
                 th:field="*{name}"
                 id="name"
               />
+              <span
+                class="text-danger"
+                th:if="${#fields.hasErrors('name')}"
+                th:errors="*{name}"
+                >Name error</span
+              >
             </div>
             <div class="form-group">
               <label for="password"> password</label>
@@ -69,6 +75,12 @@
                 id="password"
                 type="password"
               />
+              <span
+                class="text-danger"
+                th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}"
+                >Password error</span
+              >
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-success">Add</button>

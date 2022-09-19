@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.password_manager_server.password_manager_server.model.User;
 import com.password_manager_server.password_manager_server.repository.AccountRepository;
 import com.password_manager_server.password_manager_server.repository.UserRepository;
 import com.password_manager_server.password_manager_server.service.UserService;
+import com.password_manager_server.password_manager_server.service.UserServiceImpl.AccountNameAlreadyExistsException;
 
 @Controller
 public class MainController {
@@ -121,20 +123,38 @@ public class MainController {
 
         model.addAttribute("accountData", currAcct);
 
+        System.out.println("\n\nCurrent ID: " + currAcct.getId() + "\n\n");
         return "update-account";
     }
 
     @PostMapping("/updateAccount/{acctId}")
     public String updateAccount(@PathVariable String acctId, @Valid @ModelAttribute("account") Account updatedAccount,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Model model) {
 
-        if (bindingResult.hasErrors())
+        Account currAcct = accountRepository.findById(Long.parseLong(acctId))
+                .orElseThrow(() -> new NoSuchElementException("Account not found for this user"));
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("accountData", currAcct);
             return "update-account";
+        }
 
-        userService.updateAccount(updatedAccount, acctId);
+        try {
+
+            updatedAccount.setId(Long.parseLong(acctId));
+            userService.updateAccount(updatedAccount, acctId);
+
+        } catch (AccountNameAlreadyExistsException e) {
+            bindingResult.addError(new FieldError("account", "name",
+                    "Account name already exists. Cannot have accounts with duplicate names."));
+            model.addAttribute("accountData", currAcct);
+            return "update-account";
+        } catch (Exception e) {
+
+            // return "redirect:/Error";
+        }
 
         return "redirect:/?accountUpdated";
-
     }
 
 }

@@ -9,7 +9,9 @@ import com.password_manager_server.password_manager_server.web.dto.UserRegistrat
 public interface UserService extends UserDetailsService {
     User save(UserRegistrationDto userRegristrationDto);
 
-    User save(User user);
+    User addUser(User user);
+
+    User updateUser(User user);
 
     User addAccount(String username, Account account);
 

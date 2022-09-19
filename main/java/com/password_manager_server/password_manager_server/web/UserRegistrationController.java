@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.password_manager_server.password_manager_server.model.User;
 import com.password_manager_server.password_manager_server.service.UserService;
+import com.password_manager_server.password_manager_server.service.UserServiceImpl.UsernameTakenException;
 
 @Controller
 @RequestMapping("/register")
@@ -55,7 +58,16 @@ public class UserRegistrationController {
         if (bindingResult.hasErrors())
             return "registration";
 
-        userService.save(user);
+        try {
+            userService.addUser(user);
+
+        } catch (UsernameTakenException e) {
+            bindingResult.addError(new FieldError("user", "email", "Email already taken."));
+            return "registration";
+        } catch (Exception e) {
+            // return "redirect:/Error";
+        }
+
         return "redirect:/register?success";
     }
 
