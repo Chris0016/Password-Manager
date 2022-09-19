@@ -28,7 +28,7 @@ public class Account {
      * However, restrictions on invalid characters have been added.
      */
     @Pattern(regexp = "^[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]*$", message = "Field only accepts, letters, +=#?!@$%^&*_")
-    @Size(min = 8, max = 30)
+    @Size(min = 2, max = 100)
     private String password;
 
     private LocalDate dateCreated;
