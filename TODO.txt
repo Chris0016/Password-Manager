@@ -1,21 +1,5 @@
 TODO:
     
-        
-
-
-    client side validation:
-    Js Validation:
-
-        Registration: validation on client to check that password contains required characters. 
-        Registration: disabled button until all fields are complete and valid. 
-        Registration: Light email check
-
-        lOGIN: Max input length constraint on username and password
-        lOGIN: Disable login button until fields are valid
-
-        ADD ACCOUNT: max and min number of characters constraint
-   
-    
 
     Error handling 
         Front end
@@ -38,6 +22,15 @@ TODO:
     
 
 Changes made:
-   Server Side Validation:
-        Duplicate Email on registration
-        Duplicate Account Name
+   
+    client side validation:
+    Js Validation:
+
+        Registration: validation on client to check that password contains required characters. 
+        Registration: disabled button until all fields are complete and valid. 
+        Registration: Light email check
+
+        lOGIN: Max input length constraint on username and password
+        lOGIN: Disable login button until fields are valid
+
+        ADD ACCOUNT: max and min number of characters constraint

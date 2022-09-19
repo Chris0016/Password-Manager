@@ -58,6 +58,10 @@
                 class="form-control"
                 th:field="*{name}"
                 id="name"
+                minlength="2"
+                maxlength="15"
+                pattern="[a-zA-Z0-9-.]{1,30}"
+                required
               />
               <span
                 class="text-danger"
@@ -74,6 +78,10 @@
                 th:field="*{password}"
                 id="password"
                 type="password"
+                minlength="2"
+                maxlength="100"
+                pattern="[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]{1,100}"
+                required
               />
               <span
                 class="text-danger"

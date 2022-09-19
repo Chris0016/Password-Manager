@@ -53,16 +53,18 @@
             <div class="form-group">
               <label for="username"> Email </label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
                 id="username"
                 name="username"
                 placeholder="ex: username123@domain.com"
                 autofocus="autofocus"
-                required
+                minlength="4"
+                maxlength="50"
               />
             </div>
-
+            <!-- 
+Not necessary for passwords? -->
             <div class="form-group">
               <label for="password"> Password</label>
               <input

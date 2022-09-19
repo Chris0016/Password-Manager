@@ -17,7 +17,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Pattern(regexp = "^[a-zA-Z.\\-\\+=@_ ]*$", message = "Field only accepts, letters, .-+=@_")
+    @Pattern(regexp = "^[a-zA-Z.\\-\\ ]*$", message = "Field only accepts, letters, .-")
     @Size(min = 2, max = 30)
     @Column(unique = true)
     private String name;
