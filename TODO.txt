@@ -1,5 +1,6 @@
 TODO:
     
+    Thymeleaf: Consolidate password paste blocker into a single file and import
 
     Error handling 
         Front end
@@ -23,14 +24,8 @@ TODO:
 
 Changes made:
    
+
     client side validation:
-    Js Validation:
-
-        Registration: validation on client to check that password contains required characters. 
-        Registration: disabled button until all fields are complete and valid. 
-        Registration: Light email check
-
-        lOGIN: Max input length constraint on username and password
-        lOGIN: Disable login button until fields are valid
-
-        ADD ACCOUNT: max and min number of characters constraint
+        User feedback added for bad input in forms. 
+        Polishing regex pattern for name fields. 
+        Block paste into password fields 

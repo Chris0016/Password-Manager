@@ -10,6 +10,21 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+    ></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#password").bind("cut copy paste", function (e) {
+          e.preventDefault();
+          alert("You cannot paste text into this textbox!");
+          $("#password").bind("contextmenu", function (e) {
+            e.preventDefault();
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <!--navigation bar -->
@@ -59,8 +74,9 @@
                 th:field="*{name}"
                 id="name"
                 minlength="2"
-                maxlength="15"
-                pattern="[a-zA-Z0-9-.]{1,30}"
+                maxlength="30"
+                pattern="[a-zA-Z-.]{1,30}"
+                title="Allowed: Letters, Numbers, and dots"
                 required
               />
               <span
@@ -81,6 +97,14 @@
                 minlength="2"
                 maxlength="100"
                 pattern="[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]{1,100}"
+                title="Allowed: Letters, Numbers, dots, hyphens, +=#?!@$%^&*_"
+                onselectstart="return false"
+                onpaste="return false;"
+                onCut="return false"
+                onCopy="return false"
+                onDrag="return false"
+                onDrop="return false"
+                autocomplete="off"
                 required
               />
               <span

@@ -8,6 +8,21 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+    ></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#password").bind("cut copy paste", function (e) {
+          e.preventDefault();
+          alert("You cannot paste text into this textbox!");
+          $("#password").bind("contextmenu", function (e) {
+            e.preventDefault();
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <!--navigation bar -->
@@ -61,6 +76,7 @@
                 autofocus="autofocus"
                 minlength="4"
                 maxlength="50"
+                required
               />
             </div>
             <!-- 
@@ -74,6 +90,13 @@ Not necessary for passwords? -->
                 name="password"
                 placeholder="Enter Password"
                 autofocus="autofocus"
+                onselectstart="return false"
+                onpaste="return false;"
+                onCut="return false"
+                onCopy="return false"
+                onDrag="return false"
+                onDrop="return false"
+                autocomplete="off"
                 required
               />
             </div>

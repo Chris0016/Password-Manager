@@ -9,6 +9,21 @@
       crossorigin="anonymous"
     />
     <!-- <link rel="stylesheet" th:href="@{../static/css/main.css}" /> -->
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+    ></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#password").bind("cut copy paste", function (e) {
+          e.preventDefault();
+          alert("You cannot paste text into this textbox!");
+          $("#password").bind("contextmenu", function (e) {
+            e.preventDefault();
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <!--navigation bar -->
@@ -56,6 +71,7 @@
                 minlength="2"
                 maxlength="20"
                 pattern="[a-zA-Z0-9-.]{2,20}"
+                title="Letters Hyphen and dots only. "
                 required
               />
               <span
@@ -75,6 +91,7 @@
                 minlength="2"
                 maxlength="20"
                 pattern="[a-zA-Z-.]{2,20}"
+                title="Letters Hyphen and dots only. "
                 required
               />
               <span
@@ -94,6 +111,7 @@
                 th:field="*{email}"
                 autofocus="autofocus"
                 maxlength="50"
+                title="Invalid Email format"
                 required
               />
               <span
@@ -114,6 +132,14 @@
                 minlength="8"
                 maxlength="300"
                 pattern="^[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]{8, 300}"
+                title="Allowed: Letters, Numbers, dots, hyphens, +=#?!@$%^&*_"
+                onselectstart="return false"
+                onpaste="return false;"
+                onCut="return false"
+                onCopy="return false"
+                onDrag="return false"
+                onDrop="return false"
+                autocomplete="off"
                 required
               />
               <span

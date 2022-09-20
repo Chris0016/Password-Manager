@@ -123,7 +123,7 @@ public class MainController {
 
         model.addAttribute("accountData", currAcct);
 
-        System.out.println("\n\nCurrent ID: " + currAcct.getId() + "\n\n");
+        // System.out.println("\n\nCurrent ID: " + currAcct.getId() + "\n\n");
         return "update-account";
     }
 
