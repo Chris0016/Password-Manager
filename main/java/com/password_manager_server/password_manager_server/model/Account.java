@@ -27,7 +27,7 @@ public class Account {
      * password policies on what makes a good password.
      * However, restrictions on invalid characters have been added.
      */
-    @Pattern(regexp = "^[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]*$", message = "Field only accepts, letters, +=#?!@$%^&*_")
+    @Pattern(regexp = "^[a-zA-Z0-9.+=#?!@$%^&*_]+$", message = "Field only accepts, letters, numbers +=#?!@$%^&*_")
     @Size(min = 2, max = 100)
     private String password;
 

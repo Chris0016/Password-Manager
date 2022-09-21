@@ -27,7 +27,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" th:href="index.html"
+            <a class="nav-item nav-link active" th:href="@{/}"
               >Home <span class="sr-only">(current)</span></a
             >
             <a
@@ -43,7 +43,7 @@
       </nav>
       <!--navigation bar -->
     </div>
-
+    <!-- footer -->
     <div th:fragment="footer">
       <footer class="text-white" style="background-color: #100c08">
         <div class="row">
@@ -52,6 +52,77 @@
           <div class="col-md-4"><h3>Footer Footer</h3></div>
         </div>
       </footer>
+      <!-- footer -->
+      
+
+      
+      <!-- Account Fields -->
+   
+      <!-- <form th:action="@{/AddAccount}" method="post" th:object="${account}">
+        <div class="form-group">
+          <label for="name"> Name</label>
+          <input
+            name="name"
+            class="form-control"
+            th:field="*{name}"
+            id="name"
+            minlength="2"
+            maxlength="30"
+            pattern="[a-zA-Z-.]{1,30}"
+            title="Letters, Numbers, and dots"
+            required
+          />
+          <span
+            class="text-danger"
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}"
+            >Name error</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="password"> password</label>
+          <input
+            name="password"
+            class="form-control"
+            th:field="*{password}"
+            id="password"
+            type="password"
+            minlength="2"
+            maxlength="100"
+            pattern="^[a-zA-Z0-9+=#?!@$%^&*_.-]+$"
+            title="Letters, Numbers, dots, +=#?!@$%^&*_"
+            onselectstart="return false"
+            onpaste="return false;"
+            onCut="return false"
+            onCopy="return false"
+            onDrag="return false"
+            onDrop="return false"
+            autocomplete="off"
+            required
+          />
+          <input
+            id="show-password-chckbox"
+            type="checkbox"
+            onclick="toggleShowPswd()"
+          />
+          <b>Show Password</b>
+          <span
+            class="text-danger"
+            th:if="${#fields.hasErrors('password')}"
+            th:errors="*{password}"
+            >Password error</span
+          >
+        </div>
+        <div class="form-group">
+          <a type="" class="btn btn-secondary" onclick="generatePassword()">
+            generatePassword
+          </a>
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+      </form> -->
+      
+      <!-- Account Fields -->
+      </div>
     </div>
   </body>
 </html>

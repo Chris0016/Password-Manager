@@ -1,15 +1,5 @@
 TODO:
-    
-    Thymeleaf: Consolidate password paste blocker into a single file and import
-
-    Error handling 
-        Front end
-        Back end(SQL Exceptions?)
-
-    Thymeleaf templating fix. Reuse components like navbar instead of writing them all over again. 
-    Navigation Bar Fix
-    Error messages on bad input(Check Regristration)
-  
+      
     Styling
 
     Automation and Testing Module(database automation tool and puppeter testing)
@@ -23,7 +13,5 @@ TODO:
     
 
 Changes made:
-    Bug Fix: 
-        add account functionality reinstated after file lost. 
-
-    Thymeleaf fragments with footer and header added. 
+    Password Generator Functionality added with visibility toggle switch. 
+    Thymeleaf templating fixes. 
