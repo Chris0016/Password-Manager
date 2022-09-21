@@ -1,4 +1,62 @@
-span {
-  color: red !important;
-  font-style: italic;
+* {
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* sticky footer at the bottom.footer-classNecessarry because 
+of how thymeleaf templating works. The footer template has to be inserted inside of another div(span in this case). Hence, a class was added that controles the footer.  */
+.footer-class {
+  margin-top: auto;
+}
+
+.strong-padding icon-list {
+  padding-right: 40px !important;
+  height: 40px !important;
+}
+nav[a] {
+  color: gainsboro;
+}
+
+nav[a]:hover {
+  color: white;
+}
+
+footer ul {
+  list-style-type: none;
+}
+
+footer ul li {
+  display: inline-block;
+  height: 30px;
+  padding: 20px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: white;
+}
+footer ul li a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.822);
+}
+
+/* footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+} */
+
+/* 
+colors: 
+
+Vampire black: #100c08 -> Navbar and footer
+
+*/

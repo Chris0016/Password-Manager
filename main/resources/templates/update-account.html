@@ -16,12 +16,16 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/main.css}" />
   </head>
   <body>
     <!--navigation bar -->
     <header th:insert="fragments.html :: navbar"></header>
     <!--navigation bar -->
     <div class="container">
+      <div class="text-center">
+        <h2>Update Account</h2>
+      </div>
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <form
