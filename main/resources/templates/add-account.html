@@ -4,27 +4,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Account</title>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+    ></script>
+    <script th:src="@{/js/cssandjs/block_paste.js}"></script>
+    <script type="text/javascript" th:src="@{/js/cssandjs/index.js}"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <script
-      type="text/javascript"
-      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
-    ></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("#password").bind("cut copy paste", function (e) {
-          e.preventDefault();
-          alert("You cannot paste text into this textbox!");
-          $("#password").bind("contextmenu", function (e) {
-            e.preventDefault();
-          });
-        });
-      });
-    </script>
   </head>
   <body>
     <!--navigation bar -->
@@ -43,8 +34,8 @@
                 id="name"
                 minlength="2"
                 maxlength="30"
-                pattern="[a-zA-Z-.]{1,30}"
-                title="Allowed: Letters, Numbers, and dots"
+                pattern="^[a-zA-Z-.]+$"
+                title="Letters, hyphens and dots."
                 required
               />
               <span
@@ -64,8 +55,8 @@
                 type="password"
                 minlength="2"
                 maxlength="100"
-                pattern="[a-zA-Z0-9.\\-\\+=#?!@$%^&*_]{1,100}"
-                title="Allowed: Letters, Numbers, dots, hyphens, +=#?!@$%^&*_"
+                pattern="^[a-zA-Z0-9+=#?!@$%^&*_.-]+$"
+                title="Letters, Numbers, dots, +=#?!@$%^&*_"
                 onselectstart="return false"
                 onpaste="return false;"
                 onCut="return false"
@@ -75,6 +66,12 @@
                 autocomplete="off"
                 required
               />
+              <input
+                id="show-password-chckbox"
+                type="checkbox"
+                onclick="toggleShowPswd()"
+              />
+              <b>Show Password</b>
               <span
                 class="text-danger"
                 th:if="${#fields.hasErrors('password')}"
@@ -83,6 +80,13 @@
               >
             </div>
             <div class="form-group">
+              <a
+                type=""
+                class="btn btn-secondary text-white"
+                onclick="generatePassword()"
+              >
+                Generate Password
+              </a>
               <button type="submit" class="btn btn-success">Add</button>
             </div>
           </form>
