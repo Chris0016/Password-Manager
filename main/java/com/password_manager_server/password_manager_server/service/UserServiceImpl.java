@@ -89,14 +89,14 @@ public class UserServiceImpl implements UserService {
 
         LocalDate date = java.time.LocalDate.now();
 
-        Account newService = new Account(
-                newAccount.getName(),
-                newAccount.getPassword(),
-                date,
-                date);
+        newAccount.setDateCreated(date);
+        newAccount.setLastPasswordUpdate(date);
 
-        user.getAcctList().add(newService);
+        user.getAccount(newAccount.getName()).ifPresent(a -> {
+            throw new AccountNameAlreadyExistsException();
+        });
 
+        user.getAcctList().add(newAccount);
         return userRepository.save(user);
     }
 

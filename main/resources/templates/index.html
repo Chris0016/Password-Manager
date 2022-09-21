@@ -14,37 +14,8 @@
   </head>
   <body>
     <!--navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Password Manager</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#"
-            >Home <span class="sr-only">(current)</span></a
-          >
-          <a
-            class="nav-item nav-link"
-            href="/"
-            sc:authorize="isAuthenticated()"
-            th:href="@{/logout}"
-            >Logout</a
-          >
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#">Disabled</a>
-        </div>
-      </div>
-    </nav>
-
+    <header th:insert="fragments.html :: navbar"></header>
+    <!--navigation bar -->
     <div th:if="${param.accountAdded}">
       <div class="alert alert-info">Service added successfully.</div>
     </div>
@@ -60,10 +31,16 @@
     </div>
     <div class="container">
       <div class="row">
-        <button class="btn btn-primary">
-          <a th:href="@{/AddAccount}"> Add Account</a>
-        </button>
+        <div class="col-sm-6 offset-md-3"></div>
+        <a
+          th:href="@{/AddAccount}"
+          class="btn btn-primary btn-lg active"
+          role="button"
+          aria-pressed="true"
+          >Add Account</a
+        >
       </div>
+      <br />
       <div class="row">
         <table class="table table-striped">
           <thead class="thead-dark">
@@ -103,5 +80,6 @@
         </table>
       </div>
     </div>
+    <div th:insert="fragments.html :: footer"></div>
   </body>
 </html>

@@ -90,7 +90,15 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = auth.getName();
 
-        userService.addAccount(currentUsername, account);
+        try {
+            userService.addAccount(currentUsername, account);
+        } catch (AccountNameAlreadyExistsException e) {
+            bindingResult.addError(new FieldError("account", "name", "Cannot have accounts with duplicate names"));
+            return "add-account";
+        }
+        // catch(Exception e){
+
+        // }
 
         return "redirect:/?accountAdded";
 

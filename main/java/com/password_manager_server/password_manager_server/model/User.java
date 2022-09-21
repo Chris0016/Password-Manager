@@ -3,6 +3,7 @@ package com.password_manager_server.password_manager_server.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -143,6 +144,13 @@ public class User {
 
     public void setAcctList(List<Account> acctList) {
         this.acctList = acctList;
+    }
+
+    public Optional<Account> getAccount(String accountName) {
+        for (Account a : acctList)
+            if (a.getName().equals(accountName))
+                return Optional.of(a);
+        return Optional.empty();
     }
 
     public void deleteAccountById(Long id) {

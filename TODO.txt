@@ -23,9 +23,7 @@ TODO:
     
 
 Changes made:
-   
+    Bug Fix: 
+        add account functionality reinstated after file lost. 
 
-    client side validation:
-        User feedback added for bad input in forms. 
-        Polishing regex pattern for name fields. 
-        Block paste into password fields 
+    Thymeleaf fragments with footer and header added. 
