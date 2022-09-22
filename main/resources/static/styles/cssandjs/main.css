@@ -7,7 +7,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Oswald", sans-serif;
 }
+
 /* sticky footer at the bottom.footer-classNecessarry because 
 of how thymeleaf templating works. The footer template has to be inserted inside of another div(span in this case). Hence, a class was added that controles the footer.  */
 .footer-class {

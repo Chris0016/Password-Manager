@@ -13,5 +13,6 @@ TODO:
     
 
 Changes made:
-    Password Generator Functionality added with visibility toggle switch. 
-    Thymeleaf templating fixes. 
+   Logo 
+   Google fonts
+   Icons
