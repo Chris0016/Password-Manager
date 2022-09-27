@@ -39,17 +39,17 @@ public class UserServiceImpl implements UserService {
         this.accountRepository = accountRepository;
     }
 
-    @Override
-    public User save(UserRegistrationDto userRegristrationDto) {
-        User user = new User(userRegristrationDto.getFirstName(),
-                userRegristrationDto.getLastName(),
-                userRegristrationDto.getEmail(),
-                passwordEncoder.encode(userRegristrationDto.getPassword()),
-                Arrays.asList(new Role("ROLE_USER")),
-                new ArrayList<>());
+    // @Override
+    // public User save(UserRegistrationDto userRegristrationDto) {
+    // User user = new User(userRegristrationDto.getFirstName(),
+    // userRegristrationDto.getLastName(),
+    // userRegristrationDto.getEmail(),
+    // passwordEncoder.encode(userRegristrationDto.getPassword()),
+    // Arrays.asList(new Role("ROLE_USER")),
+    // new ArrayList<>());
 
-        return userRepository.save(user);
-    }
+    // return userRepository.save(user);
+    // }
 
     @Override
     public User addUser(User user) throws UsernameTakenException {
@@ -57,8 +57,14 @@ public class UserServiceImpl implements UserService {
         userRepository.findByEmail(user.getEmail()).ifPresent(user1 -> {
             throw new UsernameTakenException();
         });
+        User newUser = new User(user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                passwordEncoder.encode(user.getPassword()),
+                Arrays.asList(new Role("ROLE_USER")),
+                new ArrayList<>());
 
-        return userRepository.save(user);
+        return userRepository.save(newUser);
     }
 
     @Override

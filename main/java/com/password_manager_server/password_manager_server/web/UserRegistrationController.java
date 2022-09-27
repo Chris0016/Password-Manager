@@ -64,9 +64,10 @@ public class UserRegistrationController {
         } catch (UsernameTakenException e) {
             bindingResult.addError(new FieldError("user", "email", "Email already taken."));
             return "registration";
-        } catch (Exception e) {
-            // return "redirect:/Error";
         }
+        // catch (Exception e) {
+        // // return "redirect:/Error";
+        // }
 
         return "redirect:/register?success";
     }

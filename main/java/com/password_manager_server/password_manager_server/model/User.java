@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,9 +24,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.password_manager_server.password_manager_server.config.AESEncryption;
 import com.password_manager_server.password_manager_server.config.ValidPassword;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
@@ -33,12 +38,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Convert(converter = AESEncryption.class)
     @Pattern(regexp = "^[a-zA-Z.\\-\\ ]*$", message = "Field only accepts, letters, \".\",and \"-\"")
     @NotNull
     @Size(min = 2, max = 20)
     @Column(name = "first_name")
     private String firstName;
 
+    @Convert(converter = AESEncryption.class)
     @Pattern(regexp = "^[a-zA-Z.\\-\\ ]*$", message = "Field only accepts, letters, \".\",and \"-\"")
     @NotNull
     @Size(min = 2, max = 20)
